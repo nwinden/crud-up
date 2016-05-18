@@ -3,12 +3,14 @@ var app = express ();
 var bodyParser = require('body-parser');
 var path = require('path');
 var pg = require('pg');
-
 var connectionString = 'postgres://localhost:5432/mu'
+var pets = require('./routes/pets');
 
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.set('port', (process.env.PORT || 3000));
+
+app.use('/pets' , pets);
 
 app.get('/*', function(req, res) {
   var file = req.params[0] || 'views/index.html';
