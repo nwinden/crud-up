@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CRUD UP!</title>
+    <link rel="stylesheet" href="../styles/stylesheet.css" />
+    <script src="../vendors/jquery.min.js"></script>
+    <script src="../scripts/clientapp.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Owners and Pets</h1>
+      <a href="#">Go to Visits</a>
+    </header>
+    <main>
+      <section class="owner">
+
+        <h2>Owner Registration</h2>
+
+        <form class="owner-registration">
+
+          <label for="first_name">First Name</label>
+          <input type="text" name="first_name" class="first_name">
+
+          <label for="last_name">Last Name</label>
+          <input type="text" name="last_name" class="last_name">
+
+          <button type="button" id="registerOwner">Register</button>
+
+        </form>
+      </section>
+      <section class="pets">
+
+        <h2>Pets</h2>
+
+        <form class="pet-registration">
+
+          <label for="owner_name">Owner Name</label>
+          <select class="owner_name" name="owner_name">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+
+          <label for="pet_name">Pet Name</label>
+          <input type="text" name="pet_name" class="pet_name">
+
+          <label for="pet_breed">Pet Breed</label>
+          <input type="text" name="pet_breed" class="pet_breed">
+
+          <label for="pet_color">Pet Color</label>
+          <input type="text" name="pet_color" class="pet_color">
+
+        </form>
+
+      </section>
+      <section class="table">
+        <table class="pet_data">
+          <thead>
+            <tr>
+              <th>Owner</th>
+              <th>Pet</th>
+              <th>breed</th>
+              <th>Color</th>
+              <th>Update</th>
+              <th>Delete</th>
+              <th>Check In/Out</th>
+            </tr>
+          </thead>
+          <tbody class="target-containter">
+            <tr>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>

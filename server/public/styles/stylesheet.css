@@ -1,0 +1,11 @@
+body{
+  background-color: grey;
+}
+
+header h1, header a {
+  display: inline-block;
+}
+
+header a{
+  margin-left: 500px;
+}
