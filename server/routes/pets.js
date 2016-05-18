@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
       res.sendStatus(500);
     }
 
-    client.query('SELECT * FROM pets JOIN owners FROM owners.id = pets.owner_id', function (err, result) {
+    client.query('SELECT * FROM pets JOIN owners ON owners.id = pets.owner_id', function (err, result) {
       done();
 
       console.log(result.rows);
@@ -18,3 +18,5 @@ router.get('/', function (req, res) {
     });
   });
 });
+
+module.exports = router;
