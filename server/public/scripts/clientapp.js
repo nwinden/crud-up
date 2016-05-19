@@ -5,7 +5,7 @@ $(function() {
   addToDropdown();
 
 
-
+  $('.update').on('click', updatePet);
   $('.registerOwner').on('click', registerOwner);
   getPets();
 
@@ -21,6 +21,17 @@ $(function() {
   });
 
 });
+
+function updatePet () {
+  $.ajax({
+    type: 'PUT',
+    url:'/pets',
+    data:,
+    success: function(){
+      getPets();
+    }
+  });
+};
 
 
 function registerOwner() {
@@ -64,9 +75,10 @@ function deletePet(target) {
   $.ajax({
     type: 'DELETE',
     url:'/pets',
-    data: data[target],
+    data: data[target -1],
     success: function(){
       console.log('didnt fail');
+      getPets();
     }
   });
 }
@@ -115,8 +127,9 @@ function addPet() {
 
 function appendPet (registeredOwner) {
   //console.log('this ran', data[registeredOwner].first_name);
+  console.log(data);
    var targetData = data[registeredOwner]
-  $('.target-container').append('<tr><td class="arrayIndex">' + (registeredOwner + 1) + '</td><td>' + targetData.first_name + ' ' + targetData.last_name + '</td><td>' + targetData.pet_name + '</td><td>' + targetData.breed + '</td><td>' + targetData.color + '</td> <td> <button class="update"> Go </button> </td><td> <button class="delete"> Go </button> </td><td> <button class="check_in"> IN </button> </td>  </tr>' )
+  $('.target-container').append('<tr><td class="arrayIndex">' + (registeredOwner + 1)+ '</td><td>' + targetData.first_name + ' ' + targetData.last_name + '</td><td><input type="text">' + targetData.pet_name + '</input></td><td><input type="text">' + targetData.breed + '</input></td><td><input type="text">' + targetData.color + '</input></td> <td> <button class="update"> Go </button> </td><td> <button class="delete"> Go </button> </td><td> <button class="check_in"> IN </button> </td>  </tr>' )
 
 
 }

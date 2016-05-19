@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
       res.sendStatus(500);
     }
 
-    client.query('SELECT * FROM pets JOIN owners ON owners.id = pets.owner_id', function (err, result) {
+    client.query('SELECT pets.owner_id,pets.pet_name,pets.breed,pets.color,pets.id,owners.first_name,owners.last_name FROM pets JOIN owners ON owners.id = pets.owner_id', function (err, result) {
       done();
 
       console.log(result.rows);
@@ -43,12 +43,26 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/', function (req, res) {
+  console.log('delete function', req.body);
   pg.connect(connectionString, function (err, client, done) {
     if (err) {
       res.sendStatus(500);
     }
-      console.log('delete function', req.body);
-    });
+
+    client.query('DELETE FROM pets WHERE id =' + req.body.id,
+      function(err, result){
+        done();
+        if (err) {
+          console.log(err);
+          res.sendStatus(500);
+          return;
+        }
+        res.sendStatus(200);
+      })
   });
+
+});
+
+
 
 module.exports = router;
