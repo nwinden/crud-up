@@ -22,9 +22,12 @@ $(function() {
 
   $('.table').on('click', '.update', function(){
     var updateInfo = {};
-    $(this).parent().parent().find()
+    updateInfo['id'] = data[$(this).parent().parent().find('.arrayIndex').text()].id - 1;
+    updateInfo['pet_name'] = $(this).parent().parent().find('.pet_name').val();
+    updateInfo['breed'] = $(this).parent().parent().find('.breed').val();
+    updateInfo['color'] = $(this).parent().parent().find('.pet_color').val();
     console.log('if update info is cool we win', updateInfo);
-
+    updatePet(updateInfo);
   })
 
 

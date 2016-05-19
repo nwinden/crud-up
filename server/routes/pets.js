@@ -70,8 +70,8 @@ router.put('/', function (req, res) {
       res.sendStatus(500);
     }
 
-    client.query('UPDATE pets SET pet=$1,  breed=$2, color=$3, WHERE id =' + req.body.id,
-      [req.body.name, req.body.breed, req.body.color],
+    client.query('UPDATE pets SET pet_name = $1 ,  breed = $2 , color = $3  WHERE id =' + req.body.id,
+      [req.body.pet_name, req.body.breed, req.body.color],
       function(err, result){
         done();
         if (err) {
