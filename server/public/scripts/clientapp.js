@@ -143,7 +143,7 @@ function appendPet (registeredOwner) {
   //console.log('this ran', data[registeredOwner].first_name);
   console.log(data);
    var targetData = data[registeredOwner]
-  $('.target-container').append('<tr><td class="arrayIndex">' + (registeredOwner + 1)+ '</td><td>' + targetData.first_name + ' ' + targetData.last_name + '</td><td><input class="pet_name" name="pet_name" type="text">' + targetData.pet_name + '</input></td><td><input class="breed" name="breed" type="text">' + targetData.breed + '</input></td><td><input class="pet_color" name="color" type="text">' + targetData.color + '</input></td> <td> <button class="update"> Go </button> </td><td> <button class="delete"> Go </button> </td><td> <button class="check_in"> IN </button> </td>  </tr>' )
+  $('.target-container').append('<tr><td class="arrayIndex">' + (registeredOwner + 1)+ '</td><td>' + targetData.first_name + ' ' + targetData.last_name + '</td><td><input class="pet_name" name="pet_name" type="text" value="' + targetData.pet_name + '"></input></td><td><input class="breed" name="breed" type="text" value="' + targetData.breed + '"></input></td><td><input class="pet_color" name="color" type="text" value="' + targetData.color + '"></input></td> <td> <button class="update"> Go </button> </td><td> <button class="delete"> Go </button> </td><td> <button class="check_in"> IN </button> </td>  </tr>' )
 
 
 }
