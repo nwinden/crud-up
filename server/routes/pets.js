@@ -63,6 +63,29 @@ router.delete('/', function (req, res) {
 
 });
 
+router.put('/', function (req, res) {
+  console.log('updatePet function', req.body);
+  pg.connect(connectionString, function (err, client, done) {
+    if (err) {
+      res.sendStatus(500);
+    }
+
+    client.query('UPDATE pets SET pet=$1,  breed=$2, color=$3, WHERE id =' + req.body.id,
+      [req.body.name, req.body.breed, req.body.color],
+      function(err, result){
+        done();
+        if (err) {
+          console.log(err);
+          res.sendStatus(500);
+          return;
+        }
+        res.sendStatus(200);
+      })
+  });
+
+});
+
+
 
 
 module.exports = router;
