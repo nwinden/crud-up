@@ -7,9 +7,18 @@ $(function() {
 
 
   $('.registerOwner').on('click', registerOwner);
-
   getPets();
 
+  $('.table').on('click', '.delete', function(){
+
+    deletePet($(this).parent().parent().find('.arrayIndex').text());
+    console.log('something', $(this).parent().parent().find('.arrayIndex').text());
+  });
+
+  $('.addPet').on('click', function(){
+    addPet();
+
+  });
 
 });
 
@@ -39,10 +48,10 @@ function addToDropdown() {
   $.get('/owners', function(owners) {
 
     console.log(owners);
-    $('.owner_name').empty();
+    $('.owner_id').empty();
 
     owners.forEach(function(owner) {
-      $('.owner_name').append('<option value="' + owner.id + '" class="selecter ' + owner.first_name + '">' + owner.first_name + ' ' + owner.last_name + '</option>');
+      $('.owner_id').append('<option value="' + owner.id + '" class="selecter ' + owner.first_name + '">' + owner.first_name + ' ' + owner.last_name + '</option>');
       $('.' + owner.first_name).data('ownerID', owner.id);
     });
 
@@ -51,24 +60,63 @@ function addToDropdown() {
 
 }
 
+function deletePet(target) {
+  $.ajax({
+    type: 'DELETE',
+    url:'/pets',
+    data: data[target],
+    success: function(){
+      console.log('didnt fail');
+    }
+  });
+}
+
 function getPets() {
   $.ajax({
     type: 'GET',
     url: '/pets',
     success: function (pets) {
       data = pets;
-      console.log(data[0]);
-      appendPet(0);
+      $('.target-container').empty();
+      for(var i = 0; i < data.length; ++i){
+        appendPet(i);
+      }
     }
   })
 }
 
 
 
+function addPet() {
+
+  event.preventDefault();
+
+  var pet = {};
+
+  $.each($('.pet-registration').serializeArray(), function (i,field) {
+    pet[field.name] = field.value;
+  });
+
+
+  $.ajax({
+    type: 'POST',
+    url: '/pets',
+    data: pet,
+    success:function(success){
+      console.log('you didnt fuck up!');
+      getPets();
+    }
+
+  });
+
+
+
+}
+
 function appendPet (registeredOwner) {
   //console.log('this ran', data[registeredOwner].first_name);
    var targetData = data[registeredOwner]
-  $('.target-container').append('<tr><div><td>' + targetData.first_name + ' ' + targetData.last_name + '</td><td>' + targetData.pet_name + '</td><td>' + targetData.breed + '</td><td>' + targetData.color + '</td> <td> <button class="update"> Go </button> </td><td> <button class="delete"> Go </button> </td><td> <button class="checked_in"> IN </button> </td>  </tr>' )
+  $('.target-container').append('<tr><td class="arrayIndex">' + (registeredOwner + 1) + '</td><td>' + targetData.first_name + ' ' + targetData.last_name + '</td><td>' + targetData.pet_name + '</td><td>' + targetData.breed + '</td><td>' + targetData.color + '</td> <td> <button class="update"> Go </button> </td><td> <button class="delete"> Go </button> </td><td> <button class="check_in"> IN </button> </td>  </tr>' )
 
 
 }
