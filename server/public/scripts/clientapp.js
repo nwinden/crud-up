@@ -5,13 +5,13 @@ $(function() {
   addToDropdown();
 
 
+
   $('.registerOwner').on('click', registerOwner);
 
   getPets();
 
 
 });
-
 
 
 function registerOwner() {
@@ -36,11 +36,18 @@ function registerOwner() {
 
 function addToDropdown() {
 
-  $.get('/owners', function(response) {
+  $.get('/owners', function(owners) {
 
-    console.log(response);
+    console.log(owners);
+    $('.owner_name').empty();
+
+    owners.forEach(function(owner) {
+      $('.owner_name').append('<option value="' + owner.id + '" class="selecter ' + owner.first_name + '">' + owner.first_name + ' ' + owner.last_name + '</option>');
+      $('.' + owner.first_name).data('ownerID', owner.id);
+    });
 
   });
+
 
 }
 
