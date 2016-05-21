@@ -167,7 +167,7 @@ function addPet() {
 		url: '/pets',
 		data: pet,
 		success: function(success) {
-			console.log('you didnt fuck up!');
+
 			getPets();
 		}
 
